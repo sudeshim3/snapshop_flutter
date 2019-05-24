@@ -1,16 +1,23 @@
-# flutter_app
+# SnapShop
 
-A new Flutter application.
+Ecommerce app to sell/purchase products.
 
-## Getting Started
+![alt text](https://drive.google.com/file/d/1I_JGsnw0eTjeDirOJ4g1edwPy6Ajb308/view?usp=sharing)
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+App Structure: 
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+```
+lib    
+└───Components
+│            │  GridlList.dart
+│            │  horizontal_listview.dart
+│
+└───Pages
+│            │  ProductDetails.dart
+│
+│ main.dart                            
+```         
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+#### Library used
+1. carousel_slider

@@ -2,7 +2,7 @@
 
 Ecommerce app to sell/purchase products.
 
-![alt text](https://drive.google.com/file/d/1I_JGsnw0eTjeDirOJ4g1edwPy6Ajb308/view?usp=sharing)
+![alt text](https://i.imgur.com/EO6G6VY.gifv)
 
 
 App Structure: 

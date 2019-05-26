@@ -124,7 +124,8 @@ class _MyHomePageState extends State<MyHomePage> {
           Padding(padding: const EdgeInsets.fromLTRB(12,10,0,0)),
           HorizontalList(),
           Padding(padding: const EdgeInsets.fromLTRB(12,10,0,0)),
-          GridListProducts()
+          GridListProducts(),
+          SizedBox(height:20)
 
         ],
       ),

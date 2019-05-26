@@ -24,11 +24,6 @@ class GridListProducts extends StatelessWidget {
   }
 }
 
-/*class GridListProduct extends StatefulWidget {
-  @override
-  _GridListProductState createState() => _GridListProductState();
-}*/
-
 List products = new List();
 
 class Product {
@@ -53,14 +48,14 @@ class GridRecentItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     products
-        .add(Product("Blazers", "images/products/blazer1.jpeg", 185.0, 150.0));
+        .add(Product("Men Blazer", "images/flipkartproduct/arrow_casual_men_blazer.png", 185.0, 150.0));
     products.add(
-        Product("Blazers Red", "images/products/blazer2.jpeg", 185.0, 150.0));
+        Product("Shoe", "images/flipkartproduct/presentation_shoe.png", 185.0, 150.0));
     products.add(
-        Product("Blazers blue", "images/products/dress1.jpeg", 185.0, 150.0));
+        Product("Women Blazers", "images/flipkartproduct/blazer_women.png", 185.0, 150.0));
     products.add(
-        Product("Blazers green", "images/products/dress2.jpeg", 185.0, 150.0));
-    products.add(
+        Product("SmartPhone", "images/flipkartproduct/realme.png", 185.0, 150.0));
+    /*products.add(
         Product("Blazers blue", "images/products/hils1.jpeg", 185.0, 150.0));
     products.add(
         Product("Blazers blue", "images/products/hils2.jpeg", 185.0, 150.0));
@@ -73,7 +68,7 @@ class GridRecentItems extends StatelessWidget {
     products.add(
         Product("Blazers blue", "images/products/skt1.jpeg", 185.0, 150.0));
     products.add(
-        Product("Blazers blue", "images/products/skt2.jpeg", 185.0, 150.0));
+        Product("Blazers blue", "images/products/skt2.jpeg", 185.0, 150.0));*/
     return Container(
       child: GridView.builder(
         shrinkWrap: true,
@@ -108,7 +103,7 @@ class SingleProduct extends StatelessWidget {
       child: InkWell(
         onTap: () => {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => ProductDetailss(
+                  builder: (context) => ProductDetails(
                         product_detail_name: name,
                         product_detail_old_price: old_price,
                         product_detail_new_price: price,

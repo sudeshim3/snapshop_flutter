@@ -1,190 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'package:flutter_app/Pages/AnimatedIcon.dart';
 
-class ProductDetailss extends StatelessWidget {
+class ProductDetails extends StatefulWidget {
   final product_detail_name;
   final double product_detail_old_price;
   final double product_detail_new_price;
   final product_detail_picture;
 
-  ProductDetailss(
+  ProductDetails(
       {this.product_detail_name,
-        this.product_detail_old_price,
-        this.product_detail_new_price,
-        this.product_detail_picture}) {}
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.blue,
-        body: Column(
-          children: <Widget>[
-            Container(
-              color: Colors.white,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(top: 54.0, left: 24.0),
-                    child: Text(
-                      product_detail_name,
-                      style: TextStyle(
-                          fontSize: 35.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontFamily: 'VolteRounded'),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 54.0,right: 18.0),
-                    child: Icon(
-                      Icons.favorite_border,
-                      size: 34,
-                      color: Colors.red,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: ListView(
-                padding: EdgeInsets.all(0),
-//                controller: _controller,
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                children: <Widget>[
-                  //Product Image Section
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(60)),
-                        color: Colors.white),
-                    child: Padding(
-                      padding: const EdgeInsets.all(32.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Container(
-                            height: 390.0,
-                            child: Hero(tag:product_detail_name,
-                              child: Container(
-                                width: double.infinity,
-                                child: Image.asset(
-                                  product_detail_picture,
-                                  fit: BoxFit.fitHeight,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10.0,
-                          ),
-                          Row(
-                            children: <Widget>[
-                              FloatingActionButton(
-                                child: Icon(Icons.shopping_cart),
-                              ),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: <Widget>[
-                                    Text(
-                                      "\$${product_detail_new_price.toInt().toString()}",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 40,
-                                          color: Colors.green),
-                                    ),
-                                    SizedBox(
-                                      height: 5.0,
-                                    ),
-                                    Text(
-                                      "\$${product_detail_old_price.toInt().toString()}",
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          decoration:
-                                          TextDecoration.lineThrough),
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  // Action Buttons on product
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 10.0),
-                    child: Column(
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            SmoothStarRating(
-                              allowHalfRating: false,
-                              onRatingChanged: (v) {},
-                              starCount: 5,
-                              rating: 4,
-                              size: 40.0,
-                              color: Colors.yellow,
-                              borderColor: Colors.yellow,
-                            ),
-                            Expanded(
-                              child: Text(
-                                "61 customer reviews",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    decoration: TextDecoration.underline,
-                                    fontSize: 14),
-                                textAlign: TextAlign.end,
-                              ),
-                            )
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 12.0),
-                          child: Text(
-                            "Thin, light & durable case protects from scratches and drops. The raised lip on the case sides offers screen protection. Thin, light & durable case protects from scratches and drops. The raised lip on the case sides offers screen protection. \n Thin, light & durable case protects from scratches and drops. The raised lip on the case sides offers screen protection. Thin, light & durable case protects from scratches and drops. The raised lip on the case sides offers screen protection. ",
-                            softWrap: true,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontFamily: 'ProximaNova'),
-                          ),
-                        )
-                        /* Padding(
-                          padding: const EdgeInsets.fromLTRB(18, 10, 18, 0),
-                          child: Row(
-                            children: <Widget>[
-                              Flexible(
-                                  child: Text(
-                                "Thin, light & durable case protects from scratches and drops. The raised lip on the case sides offers screen protection. Thin, light & durable case protects from scratches and drops. The raised lip on the case sides offers screen protection. ",
-                                softWrap: true,
-                                style: TextStyle(color: Colors.white, fontSize: 15),
-                              ))
-                            ],
-                          ),
-                        )*/
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  )
-                ],
-              ),
-            ),
-          ],
-        ));
-  }
-}
-
-class ProductDetails extends StatefulWidget {
-
+      this.product_detail_old_price,
+      this.product_detail_new_price,
+      this.product_detail_picture});
 
 
 
@@ -193,9 +21,11 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
+
   ScrollController _controller;
   double newCurveRadius = 0;
   double curveRadius = 120;
+  bool fav = false;
 
   Future<void> executeAfterBuild() async {
     // this code will get executed after the build method
@@ -210,6 +40,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   @override
   void initState() {
     _controller = ScrollController();
+
 
     _controller.addListener(_scrollListener);
 
@@ -234,6 +65,148 @@ class _ProductDetailsState extends State<ProductDetails> {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+        backgroundColor: Colors.blue,
+        body: ListView(
+          scrollDirection: Axis.vertical,
+          controller: _controller,
+          shrinkWrap: true,
+          children: <Widget>[
+            //Product Image Section
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  borderRadius:
+                      BorderRadius.only(bottomRight: Radius.circular(newCurveRadius)),
+                  color: Colors.white),
+              child: Padding(
+                padding: const EdgeInsets.all(32.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    /*SizedBox(
+                      height: 32.0,
+                    ),*/
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          flex:6,
+                          child: Text(
+                            "Black Blazer",
+                            style: TextStyle(
+                                fontSize: 35.0, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom:3.0),
+                              child: HighLightedIcon(Icons.favorite_border,size: 34,color: Colors.red)
+                              /*IconButton(icon: Icon(fav ? Icons.favorite : Icons.favorite_border, color: Colors.red,size: 35,),onPressed: () {
+                          setState(() {
+                              fav = !fav;
+                          });
+                        },),*/
+                            )),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 32.0,
+                    ),
+                    Container(
+                      height: 360,
+                      child: Hero(tag:widget.product_detail_name,
+                        child: Image.asset(widget.product_detail_picture,
+                            width: double.infinity, fit: BoxFit.contain),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 35.0,
+                    ),
+                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              "\$${widget.product_detail_new_price.toInt().toString()}",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 40,
+                                  color: Colors.green),
+                            ),
+                            SizedBox(
+                              height: 5.0,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left:8.0),
+                              child: Text(
+                                "\$${widget.product_detail_old_price.toInt().toString()}",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.lineThrough),
+                              ),
+                            )
+                          ],
+                        ),
+                        FloatingActionButton(
+                          child: Icon(Icons.shopping_cart),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            // Action Buttons on product
+            Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Row(
+                    children: <Widget>[
+                      SmoothStarRating(
+                        allowHalfRating: false,
+                        onRatingChanged: (v) {},
+                        starCount: 5,
+                        rating: 4,
+                        size: 40.0,
+                        color: Colors.yellow,
+                        borderColor: Colors.yellow,
+                      ),
+                      Expanded(
+                        child: Text(
+                          "61 customer reviews",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              decoration: TextDecoration.underline,
+                              fontSize: 14),
+                          textAlign: TextAlign.end,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
 
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(18, 10, 18, 0),
+                  child: Row(
+                    children: <Widget>[
+                      Flexible(
+                          child: Text(
+                        "Thin, light & durable case protects from scratches and drops. The raised lip on the case sides offers screen protection. Thin, light & durable case protects from scratches and drops. The raised lip on the case sides offers screen protection. ",
+                        softWrap: true,
+                            style: TextStyle(color: Colors.white, fontSize: 15),
+                      ))
+                    ],
+                  ),
+                )
+              ],
+            ),
+            SizedBox(height: 30,)
+          ],
+        ));
   }
 }

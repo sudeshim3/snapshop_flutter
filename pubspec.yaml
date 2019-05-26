@@ -74,6 +74,17 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+  fonts:
+    - family: VolteRounded
+      fonts:
+       - asset: fonts/Volte_Rounded/VolteRounded-Regular.otf
+       - asset: fonts/Volte_Rounded/VolteRounded-Semibold.otf
+       - asset: fonts/Volte_Rounded/VolteRounded-Medium.otf
+    - family: ProximaNova
+      fonts:
+       - asset: fonts/Proxima_Nova/Proxima-Nova-Regular.otf
+       - asset: fonts/Proxima_Nova/Proxima-Nova-SemiBold.otf
+       - asset: fonts/Proxima_Nova/Proxima-Nova-Bold.otf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

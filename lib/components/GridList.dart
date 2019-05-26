@@ -1,23 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Pages/ProductDetail.dart';
 
-class GridListProduct extends StatefulWidget {
-  @override
-  _GridListProductState createState() => _GridListProductState();
-}
-
-List products = new List();
-
-class Product {
-  final String name;
-  final String pictures;
-  final double old_price;
-  final double price;
-
-  Product(this.name, this.pictures, this.old_price, this.price);
-}
-
-class _GridListProductState extends State<GridListProduct> {
+class GridListProducts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,6 +23,31 @@ class _GridListProductState extends State<GridListProduct> {
     );
   }
 }
+
+/*class GridListProduct extends StatefulWidget {
+  @override
+  _GridListProductState createState() => _GridListProductState();
+}*/
+
+List products = new List();
+
+class Product {
+  final String name;
+  final String pictures;
+  final double old_price;
+  final double price;
+
+  Product(this.name, this.pictures, this.old_price, this.price);
+}
+
+/*class _GridListProductState extends State<GridListProduct> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+
+    );
+  }
+}*/
 
 class GridRecentItems extends StatelessWidget {
   @override
@@ -95,30 +104,34 @@ class SingleProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-        child: Hero(
-      tag: name,
-      child: Material(
-        child: InkWell(
-          onTap: () => {Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-              ProductDetails(product_detail_name: name,product_detail_old_price: old_price,product_detail_new_price: price,product_detail_picture: pictures,)))},
-          child: GridTile(
-            footer: Container(
-                color: Colors.white70,
-                child: ListTile(
-                  leading: Text(
-                    name,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Text(
-                    "\$${price.toInt()}",
-                    style: TextStyle(decoration: TextDecoration.lineThrough),
-                  ),
-                )),
-            child: Container(
-              width: 50,
-              height: 50,
-              child: Image.asset(pictures),
-            ),
+        child: Material(
+      child: InkWell(
+        onTap: () => {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ProductDetailss(
+                        product_detail_name: name,
+                        product_detail_old_price: old_price,
+                        product_detail_new_price: price,
+                        product_detail_picture: pictures,
+                      )))
+            },
+        child: GridTile(
+          footer: Container(
+              color: Colors.white70,
+              child: ListTile(
+                leading: Text(
+                  name,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                subtitle: Text(
+                  "\$${price.toInt()}",
+                  style: TextStyle(decoration: TextDecoration.lineThrough),
+                ),
+              )),
+          child: Container(
+            width: 50,
+            height: 50,
+            child: Hero(tag: name, child: Image.asset(pictures)),
           ),
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Pages/ProductDetail.dart';
+import 'package:flutter_app/models/Product.dart';
 
 class GridListProducts extends StatelessWidget {
   @override
@@ -24,16 +25,8 @@ class GridListProducts extends StatelessWidget {
   }
 }
 
-List products = new List();
+List<List<Product>> products = new List();
 
-class Product {
-  final String name;
-  final String pictures;
-  final double old_price;
-  final double price;
-
-  Product(this.name, this.pictures, this.old_price, this.price);
-}
 
 /*class _GridListProductState extends State<GridListProduct> {
   @override
@@ -47,14 +40,33 @@ class Product {
 class GridRecentItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    products
-        .add(Product("Men Blazer", "images/flipkartproduct/arrow_casual_men_blazer.png", 185.0, 150.0));
-    products.add(
-        Product("Shoe", "images/flipkartproduct/presentation_shoe.png", 185.0, 150.0));
-    products.add(
-        Product("Women Blazers", "images/flipkartproduct/blazer_women.png", 185.0, 150.0));
-    products.add(
-        Product("SmartPhone", "images/flipkartproduct/realme.png", 185.0, 150.0));
+    List<Product> menDress = new List();
+    menDress.add(Product("Men Blazer", "images/flipkartproduct/arrow_casual_men_blazer.png", 185.0, 150.0));
+    menDress.add(Product("Men Blazer", "images/flipkartproduct/arrow_blazer.png", 185.0, 150.0));
+    menDress.add(Product("Men Blazer", "images/flipkartproduct/arrow_blazer_side.png", 185.0, 150.0));
+    menDress.add(Product("Men Blazer", "images/flipkartproduct/arrow_back.png", 185.0, 150.0));
+    products.add(menDress);
+
+    List<Product> womenDress = new List();
+    womenDress.add(Product("Women Blazers", "images/flipkartproduct/blazer_women.png", 185.0, 150.0));
+    womenDress.add(Product("Women Blazers", "images/flipkartproduct/ngt_formal_blazzer.png", 185.0, 150.0));
+    womenDress.add(Product("Women Blazers", "images/flipkartproduct/women_blazer_back.png", 185.0, 150.0));
+    products.add(womenDress);
+
+    List<Product> shoe = new List();
+    shoe.add(Product("Shoe", "images/flipkartproduct/presentation_shoe.png", 185.0, 150.0));
+    shoe.add(Product("Shoe", "images/flipkartproduct/asian_runner.png", 185.0, 150.0));
+    shoe.add(Product("Shoe", "images/flipkartproduct/side_shoe.png", 185.0, 150.0));
+    shoe.add(Product("Shoe", "images/flipkartproduct/back_shoe.png", 185.0, 150.0));
+    products.add(shoe);
+
+    List<Product> phone = new List();
+    phone.add(Product("SmartPhone", "images/flipkartproduct/realme.png", 185.0, 150.0));
+    phone.add(Product("SmartPhone", "images/flipkartproduct/realme_left_tilt.png", 185.0, 150.0));
+    phone.add(Product("SmartPhone", "images/flipkartproduct/realme_right_tilt.png", 185.0, 150.0));
+    phone.add(Product("SmartPhone", "images/flipkartproduct/realme_back.png", 185.0, 150.0));
+    products.add(phone);
+
     /*products.add(
         Product("Blazers blue", "images/products/hils1.jpeg", 185.0, 150.0));
     products.add(
@@ -77,10 +89,10 @@ class GridRecentItems extends StatelessWidget {
         scrollDirection: Axis.vertical,
         physics: BouncingScrollPhysics(),
         itemBuilder: (BuildContext context, int index) {
-          Product it = products[index];
+          Product it = products[index][0];
           return SingleProduct(
               name: it.name,
-              pictures: it.pictures,
+              pictures: products[index],
               old_price: it.old_price,
               price: it.price);
         },
@@ -91,7 +103,8 @@ class GridRecentItems extends StatelessWidget {
 }
 
 class SingleProduct extends StatelessWidget {
-  final String name, pictures;
+  final String name;
+  final List<Product> pictures;
   final double old_price, price;
 
   SingleProduct({this.name, this.pictures, this.old_price, this.price});
@@ -104,9 +117,9 @@ class SingleProduct extends StatelessWidget {
         onTap: () => {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => ProductDetails(
-                        product_detail_name: name,
-                        product_detail_old_price: old_price,
-                        product_detail_new_price: price,
+                        product_detail_name: pictures[0].name,
+                        product_detail_old_price: pictures[0].old_price,
+                        product_detail_new_price: pictures[0].price,
                         product_detail_picture: pictures,
                       )))
             },
@@ -126,7 +139,7 @@ class SingleProduct extends StatelessWidget {
           child: Container(
             width: 50,
             height: 50,
-            child: Hero(tag: name, child: Image.asset(pictures)),
+            child: Hero(tag: name, child: Image.asset(pictures[0].pictures)),
           ),
         ),
       ),

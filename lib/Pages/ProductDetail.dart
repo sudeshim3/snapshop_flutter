@@ -1,27 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:flutter_app/Pages/AnimatedIcon.dart';
+import 'package:flutter_app/Carousal.dart';
+import 'package:flutter_app/models/Product.dart';
 
 class ProductDetails extends StatefulWidget {
   final product_detail_name;
   final double product_detail_old_price;
   final double product_detail_new_price;
-  final product_detail_picture;
+  final List<Product> product_detail_picture;
+  List<String> carousalImage = List<String>();
 
   ProductDetails(
       {this.product_detail_name,
       this.product_detail_old_price,
       this.product_detail_new_price,
-      this.product_detail_picture});
+      this.product_detail_picture}) {
 
-
+    for(int i = 0; i < product_detail_picture.length; i++) {
+      carousalImage.add(product_detail_picture[i].pictures);
+    }
+  }
 
   @override
   _ProductDetailsState createState() => _ProductDetailsState();
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
-
   ScrollController _controller;
   double newCurveRadius = 0;
   double curveRadius = 120;
@@ -40,7 +45,6 @@ class _ProductDetailsState extends State<ProductDetails> {
   @override
   void initState() {
     _controller = ScrollController();
-
 
     _controller.addListener(_scrollListener);
 
@@ -76,11 +80,11 @@ class _ProductDetailsState extends State<ProductDetails> {
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                  borderRadius:
-                      BorderRadius.only(bottomRight: Radius.circular(newCurveRadius)),
+                  borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(newCurveRadius)),
                   color: Colors.white),
               child: Padding(
-                padding: const EdgeInsets.all(32.0),
+//                padding: const EdgeInsets.all(32.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -90,7 +94,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     Row(
                       children: <Widget>[
                         Expanded(
-                          flex:6,
+                          flex: 6,
                           child: Text(
                             "Black Blazer",
                             style: TextStyle(
@@ -98,32 +102,30 @@ class _ProductDetailsState extends State<ProductDetails> {
                           ),
                         ),
                         Expanded(
-                          flex: 1,
+                            flex: 1,
                             child: Padding(
-                              padding: const EdgeInsets.only(bottom:3.0),
-                              child: HighLightedIcon(Icons.favorite_border,size: 34,color: Colors.red)
-                              /*IconButton(icon: Icon(fav ? Icons.favorite : Icons.favorite_border, color: Colors.red,size: 35,),onPressed: () {
+                                padding: const EdgeInsets.only(bottom: 3.0),
+                                child: HighLightedIcon(Icons.favorite_border,
+                                    size: 34, color: Colors.red)
+                                /*IconButton(icon: Icon(fav ? Icons.favorite : Icons.favorite_border, color: Colors.red,size: 35,),onPressed: () {
                           setState(() {
                               fav = !fav;
                           });
                         },),*/
-                            )),
+                                )),
                       ],
                     ),
                     SizedBox(
                       height: 32.0,
                     ),
                     Container(
-                      height: 360,
-                      child: Hero(tag:widget.product_detail_name,
-                        child: Image.asset(widget.product_detail_picture,
-                            width: double.infinity, fit: BoxFit.contain),
-                      ),
+                      height: 375,
+                      child: CarouselWithIndicator(
+                          landingImage: widget.carousalImage, fitType:BoxFit.contain, previewType: true, height: 375.0),
                     ),
-                    SizedBox(
-                      height: 35.0,
-                    ),
-                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    SizedBox(height: 20.0,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -139,7 +141,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               height: 5.0,
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left:8.0),
+                              padding: const EdgeInsets.only(left: 8.0),
                               child: Text(
                                 "\$${widget.product_detail_old_price.toInt().toString()}",
                                 style: TextStyle(
@@ -189,7 +191,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                     ],
                   ),
                 ),
-
                 Padding(
                   padding: const EdgeInsets.fromLTRB(18, 10, 18, 0),
                   child: Row(
@@ -198,14 +199,16 @@ class _ProductDetailsState extends State<ProductDetails> {
                           child: Text(
                         "Thin, light & durable case protects from scratches and drops. The raised lip on the case sides offers screen protection. Thin, light & durable case protects from scratches and drops. The raised lip on the case sides offers screen protection. ",
                         softWrap: true,
-                            style: TextStyle(color: Colors.white, fontSize: 15),
+                        style: TextStyle(color: Colors.white, fontSize: 15),
                       ))
                     ],
                   ),
                 )
               ],
             ),
-            SizedBox(height: 30,)
+            SizedBox(
+              height: 30,
+            )
           ],
         ));
   }

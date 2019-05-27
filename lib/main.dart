@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'components/horizontal_listview.dart';
 import 'components/GridList.dart';
+import 'Carousal.dart';
 
 void main() => runApp(MyApp());
 
 final Widget placeholder = Container(color: Colors.grey);
-List imgList = [
+List<String> imgList = [
   'images/amazonprime.png',
   'images/clothes.png',
   'images/w1.jpeg',
@@ -32,7 +32,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    Widget imageCarousal = CarouselSlider(
+   /* Widget imageCarousal = CarouselSlider(
       height: 200.0,
       autoPlay: true,
       autoPlayInterval: Duration(seconds: 3),
@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
           },
         );
       }).toList(),
-    );
+    );*/
 
     return Scaffold(
       appBar: AppBar(
@@ -120,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: ListView(
         children: <Widget>[
-          CarouselWithIndicator(),
+          CarouselWithIndicator(landingImage: imgList,),
           Padding(padding: const EdgeInsets.fromLTRB(12,10,0,0)),
           HorizontalList(),
           Padding(padding: const EdgeInsets.fromLTRB(12,10,0,0)),
@@ -137,91 +137,5 @@ class _MyHomePageState extends State<MyHomePage> {
   checkout() {}
 }
 
-class CarouselWithIndicator extends StatefulWidget {
-  @override
-  _CarouselWithIndicatorState createState() => _CarouselWithIndicatorState();
-}
-
-class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
-  int _current = 0;
-
-  List<T> map<T>(List list, Function handler) {
-    List<T> result = [];
-    for (var i = 0; i < list.length; i++) {
-      result.add(handler(i, list[i]));
-    }
-
-    return result;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-        children: <Widget>[
-          Stack(
-            children: [
-              ShaderMask(
-                shaderCallback: (rect) {
-                  return LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [Colors.black, Colors.transparent],
-                  ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
-                },
-                blendMode: BlendMode.dstIn,
-                child: CarouselSlider(
-                  height: 200.0,
-                  autoPlay: true,
-                  autoPlayInterval: Duration(seconds: 3),
-                  pauseAutoPlayOnTouch: Duration(seconds: 5),
-                  viewportFraction: 1.0,
-                  onPageChanged: (index) {
-                    setState(() {
-                      _current = index;
-                    });
-                  },
-                  autoPlayCurve: Curves.fastOutSlowIn,
-                  items: imgList.map((imgPath) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return Container(
-                            width: MediaQuery
-                                .of(context)
-                                .size
-                                .width,
-                            child: Image.asset(imgPath, fit: BoxFit.cover,)
-                        );
-                      },
-                    );
-                  }).toList(),
-                ),
-              ),
-              Positioned(
-                  bottom: 0.0,
-                  left: 0.0,
-                  right: 0.0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: map<Widget>(imgList, (index, url) {
-                      return AnimatedContainer(
-                        duration: Duration(milliseconds: 500),
-                        width: _current == index ? 12.0 : 8.0,
-                        height: _current == index ? 12.0 : 8.0,
-                        margin: EdgeInsets.symmetric(
-                            vertical: 1.0, horizontal: 2.0),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: _current == index ? Colors.lightBlue : Colors.grey
-                        ),
-                      );
-                    }),
-                  )
-              ),
-            ],
-          )
-        ]
-    );
-  }
-}
 
 

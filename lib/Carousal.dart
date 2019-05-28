@@ -3,20 +3,23 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_app/models/Product.dart';
 
 class CarouselWithIndicator extends StatefulWidget {
-
 //  final List<Product> productList;
   final List<String> landingImage;
   final BoxFit fitType;
   final bool previewType;
   final double height;
-  CarouselWithIndicator({ this.landingImage, this.fitType = BoxFit.cover, this.previewType = false, this.height = 200});
+  final String product_name;
+
+  CarouselWithIndicator(
+      {this.product_name,
+      this.landingImage,
+      this.fitType = BoxFit.cover,
+      this.previewType = false,
+      this.height = 200});
+
   @override
   _CarouselWithIndicatorState createState() => _CarouselWithIndicatorState();
-
-
 }
-
-
 
 class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
   int _current = 0;
@@ -32,23 +35,33 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        children: <Widget>[
-          Stack(
-            children: [
-              widget.previewType ? CarousalImage(landingImage:widget.landingImage, fitType: widget.fitType,height: widget.height,):ShaderMask(
-                shaderCallback: (rect) {
-                  return LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [Colors.black, Colors.transparent],
-                  ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
-                },
-                blendMode: BlendMode.dstIn,
-                child: CarousalImage(landingImage:widget.landingImage, fitType: widget.fitType, height:widget.height),
-              ),
-              !widget.previewType ?
-              Positioned(
+    return Column(children: <Widget>[
+      Stack(
+        children: [
+          widget.previewType
+              ? CarousalImage(
+                  product_name: widget.product_name,
+                  landingImage: widget.landingImage,
+                  fitType: widget.fitType,
+                  height: widget.height,
+                )
+              : ShaderMask(
+                  shaderCallback: (rect) {
+                    return LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Colors.black, Colors.transparent],
+                    ).createShader(
+                        Rect.fromLTRB(0, 0, rect.width, rect.height));
+                  },
+                  blendMode: BlendMode.dstIn,
+                  child: CarousalImage(
+                      landingImage: widget.landingImage,
+                      fitType: widget.fitType,
+                      height: widget.height),
+                ),
+          !widget.previewType
+              ? Positioned(
                   bottom: 0.0,
                   left: 0.0,
                   right: 0.0,
@@ -63,27 +76,26 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
                             vertical: 1.0, horizontal: 2.0),
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: _current == index ? Colors.lightBlue : Colors.grey
-                        ),
+                            color: _current == index
+                                ? Colors.lightBlue
+                                : Colors.grey),
                       );
                     }),
-                  )
-              ):Container()
-            ],
-          )
-        ]
-    );
+                  ))
+              : Container()
+        ],
+      )
+    ]);
   }
 }
 
 class CarousalImage extends StatefulWidget {
-
   final List<String> landingImage;
   final BoxFit fitType;
   final double height;
+  final String product_name;
 
-  CarousalImage({this.landingImage, this.fitType, this.height});
-
+  CarousalImage({this.product_name = "",this.landingImage, this.fitType, this.height});
 
   @override
   _CarousalImageState createState() => _CarousalImageState();
@@ -98,31 +110,26 @@ class _CarousalImageState extends State<CarousalImage> {
       autoPlayInterval: Duration(seconds: 3),
       pauseAutoPlayOnTouch: Duration(seconds: 5),
       viewportFraction: 1.0,
-    /*  onPageChanged: (index) {
+      /*  onPageChanged: (index) {
         setState(() {
           _current = index;
         });
       },*/
       autoPlayCurve: Curves.fastOutSlowIn,
-      items:  widget.landingImage.map((product) {
+      items: widget.landingImage.map((product) {
         Product productds = null;
         String picturePath;
-        if(product is Product) {
+        if (product is Product) {
           productds = product as Product;
           picturePath = productds.pictures;
-        }
-        else {
+        } else {
           picturePath = product as String;
         }
         return Builder(
           builder: (BuildContext context) {
             return Container(
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width,
-                child: Image.asset(picturePath , fit: widget.fitType)
-            );
+                width: MediaQuery.of(context).size.width,
+                child:  widget.product_name == ""? Image.asset(picturePath, fit: widget.fitType): Hero(tag: widget.product_name,child: Image.asset(picturePath, fit: widget.fitType) ));
           },
         );
       }).toList(),

@@ -16,7 +16,7 @@ class GridListProducts extends StatelessWidget {
                 style: TextStyle(fontSize: 21.0),
               )),
           SizedBox(
-            height: 20.0,
+            height: 10.0,
           ),
           GridRecentItems()
         ],
@@ -40,52 +40,70 @@ List<List<Product>> products = new List();
 class GridRecentItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery
+        .of(context)
+        .size;
+
+    /*24 is for notification bar on Android*/
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 2;
+    final double itemWidth = size.width / 2;
+
     List<Product> menDress = new List();
-    menDress.add(Product("Men Blazer", "images/flipkartproduct/arrow_casual_men_blazer.png", 185.0, 150.0));
-    menDress.add(Product("Men Blazer", "images/flipkartproduct/arrow_blazer.png", 185.0, 150.0));
-    menDress.add(Product("Men Blazer", "images/flipkartproduct/arrow_blazer_side.png", 185.0, 150.0));
-    menDress.add(Product("Men Blazer", "images/flipkartproduct/arrow_back.png", 185.0, 150.0));
+    menDress.add(Product(
+        "Men Blazer", "images/flipkartproduct/arrow_casual_men_blazer.png",
+        185.0, 150.0));
+    menDress.add(Product(
+        "Men Blazer", "images/flipkartproduct/arrow_blazer.png", 185.0, 150.0));
+    menDress.add(Product(
+        "Men Blazer", "images/flipkartproduct/arrow_blazer_side.png", 185.0,
+        150.0));
+    menDress.add(Product(
+        "Men Blazer", "images/flipkartproduct/arrow_back.png", 185.0, 150.0));
     products.add(menDress);
 
     List<Product> womenDress = new List();
-    womenDress.add(Product("Women Blazers", "images/flipkartproduct/blazer_women.png", 185.0, 150.0));
-    womenDress.add(Product("Women Blazers", "images/flipkartproduct/ngt_formal_blazzer.png", 185.0, 150.0));
-    womenDress.add(Product("Women Blazers", "images/flipkartproduct/women_blazer_back.png", 185.0, 150.0));
+    womenDress.add(Product(
+        "Women Blazers", "images/flipkartproduct/blazer_women.png", 185.0,
+        150.0));
+    womenDress.add(Product(
+        "Women Blazers", "images/flipkartproduct/ngt_formal_blazzer.png", 185.0,
+        150.0));
+    womenDress.add(Product(
+        "Women Blazers", "images/flipkartproduct/women_blazer_back.png", 185.0,
+        150.0));
     products.add(womenDress);
 
     List<Product> shoe = new List();
-    shoe.add(Product("Shoe", "images/flipkartproduct/presentation_shoe.png", 185.0, 150.0));
-    shoe.add(Product("Shoe", "images/flipkartproduct/asian_runner.png", 185.0, 150.0));
-    shoe.add(Product("Shoe", "images/flipkartproduct/side_shoe.png", 185.0, 150.0));
-    shoe.add(Product("Shoe", "images/flipkartproduct/back_shoe.png", 185.0, 150.0));
+    shoe.add(Product(
+        "Shoe", "images/flipkartproduct/presentation_shoe.png", 185.0, 150.0));
+    shoe.add(Product(
+        "Shoe", "images/flipkartproduct/asian_runner.png", 185.0, 150.0));
+    shoe.add(
+        Product("Shoe", "images/flipkartproduct/side_shoe.png", 185.0, 150.0));
+    shoe.add(
+        Product("Shoe", "images/flipkartproduct/back_shoe.png", 185.0, 150.0));
     products.add(shoe);
 
     List<Product> phone = new List();
-    phone.add(Product("SmartPhone", "images/flipkartproduct/realme.png", 185.0, 150.0));
-    phone.add(Product("SmartPhone", "images/flipkartproduct/realme_left_tilt.png", 185.0, 150.0));
-    phone.add(Product("SmartPhone", "images/flipkartproduct/realme_right_tilt.png", 185.0, 150.0));
-    phone.add(Product("SmartPhone", "images/flipkartproduct/realme_back.png", 185.0, 150.0));
+    phone.add(Product(
+        "SmartPhone", "images/flipkartproduct/realme.png", 185.0, 150.0));
+    phone.add(Product(
+        "SmartPhone", "images/flipkartproduct/realme_left_tilt.png", 185.0,
+        150.0));
+    phone.add(Product(
+        "SmartPhone", "images/flipkartproduct/realme_right_tilt.png", 185.0,
+        150.0));
+    phone.add(Product(
+        "SmartPhone", "images/flipkartproduct/realme_back.png", 185.0, 150.0));
     products.add(phone);
 
-    /*products.add(
-        Product("Blazers blue", "images/products/hils1.jpeg", 185.0, 150.0));
-    products.add(
-        Product("Blazers blue", "images/products/hils2.jpeg", 185.0, 150.0));
-    products.add(
-        Product("Blazers blue", "images/products/pants1.jpg", 185.0, 150.0));
-    products.add(
-        Product("Blazers blue", "images/products/pants2.jpeg", 185.0, 150.0));
-    products.add(
-        Product("Blazers blue", "images/products/shoe1.jpg", 185.0, 150.0));
-    products.add(
-        Product("Blazers blue", "images/products/skt1.jpeg", 185.0, 150.0));
-    products.add(
-        Product("Blazers blue", "images/products/skt2.jpeg", 185.0, 150.0));*/
     return Container(
       child: GridView.builder(
         shrinkWrap: true,
         gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio:(itemWidth / itemHeight),),
         scrollDirection: Axis.vertical,
         physics: BouncingScrollPhysics(),
         itemBuilder: (BuildContext context, int index) {
@@ -111,38 +129,76 @@ class SingleProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        child: Material(
-      child: InkWell(
-        onTap: () => {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => ProductDetails(
-                        product_detail_name: pictures[0].name,
-                        product_detail_old_price: pictures[0].old_price,
-                        product_detail_new_price: pictures[0].price,
-                        product_detail_picture: pictures,
-                      )))
-            },
-        child: GridTile(
-          footer: Container(
-              color: Colors.white70,
-              child: ListTile(
-                leading: Text(
-                  name,
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                subtitle: Text(
-                  "\$${price.toInt()}",
-                  style: TextStyle(decoration: TextDecoration.lineThrough),
-                ),
-              )),
-          child: Container(
-            width: 50,
-            height: 50,
-            child: Hero(tag: name, child: Image.asset(pictures[0].pictures)),
-          ),
-        ),
-      ),
-    ));
+    return Container(
+
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Card(
+                      child: Material(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.yellow,
+                        child: Stack(
+                          fit: StackFit.expand,
+                          children: <Widget>[
+                            new DecoratedBox(
+                              decoration: new BoxDecoration(
+                                //color: Colors.lightGreen
+                                  gradient: new LinearGradient(
+                                      begin: FractionalOffset.bottomLeft,
+                                      end: FractionalOffset.topRight,
+                                      colors: [
+                                         HexColor("#D3CCE3"),//#D3CCE3
+                                        HexColor("#E9E4F0")
+//                                        #F0C27B   #4B1248
+                                      ]
+                                  )
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () =>
+                              {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        ProductDetails(
+                                          product_detail_name: pictures[0].name,
+                                          product_detail_old_price: pictures[0].old_price,
+                                          product_detail_new_price: pictures[0].price,
+                                          product_detail_picture: pictures,
+                                        )))
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(0,8.0,8.0,0),
+                                child: Hero(
+                                    tag: name, child: Image.asset(pictures[0].pictures,fit: BoxFit.contain,)),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Text(name, style: TextStyle(fontSize: 16),),
+            SizedBox(height: 8,)
+          ],
+        ));
   }
+}
+
+class HexColor extends Color {
+  static int _getColorFromHex(String hexColor) {
+    hexColor = hexColor.toUpperCase().replaceAll("#", "");
+    if (hexColor.length == 6) {
+      hexColor = "FF" + hexColor;
+    }
+    return int.parse(hexColor, radix: 16);
+  }
+
+  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 }

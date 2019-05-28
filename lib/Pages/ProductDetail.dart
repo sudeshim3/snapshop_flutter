@@ -84,7 +84,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       bottomRight: Radius.circular(newCurveRadius)),
                   color: Colors.white),
               child: Padding(
-//                padding: const EdgeInsets.all(32.0),
+                padding: const EdgeInsets.all(32.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -119,9 +119,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                       height: 32.0,
                     ),
                     Container(
-                      height: 375,
-                      child: CarouselWithIndicator(
-                          landingImage: widget.carousalImage, fitType:BoxFit.contain, previewType: true, height: 375.0),
+                      height: MediaQuery.of(context).size.height * 0.6,
+                      child: CarouselWithIndicator(product_name: widget.product_detail_name,
+                          landingImage: widget.carousalImage, fitType:BoxFit.contain, previewType: true, height: MediaQuery.of(context).size.height * 0.6),
                     ),
                     SizedBox(height: 20.0,),
                     Row(

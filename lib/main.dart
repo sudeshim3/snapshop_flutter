@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(fontFamily: 'ProximaNova'),
       debugShowCheckedModeBanner: false,
       home: MyHomePage(),
     );
@@ -57,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black54,
-        title: Text('SnapShop'),
+        title: Text('SnapShop',style: TextStyle(fontFamily: 'VolteRounded'),),
         elevation: 0.0,
         actions: <Widget>[
           IconButton(

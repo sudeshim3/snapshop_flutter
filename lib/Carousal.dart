@@ -110,6 +110,8 @@ class _CarousalImageState extends State<CarousalImage> {
       autoPlayInterval: Duration(seconds: 3),
       pauseAutoPlayOnTouch: Duration(seconds: 5),
       viewportFraction: 1.0,
+//      viewportFraction: 0.5,
+      enlargeCenterPage: true,
       /*  onPageChanged: (index) {
         setState(() {
           _current = index;

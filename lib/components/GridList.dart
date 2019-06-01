@@ -151,9 +151,11 @@ class SingleProduct extends StatelessWidget {
                                       begin: FractionalOffset.bottomLeft,
                                       end: FractionalOffset.topRight,
                                       colors: [
-                                         HexColor("#D3CCE3"),//#D3CCE3
-                                        HexColor("#E9E4F0")
-//                                        #F0C27B   #4B1248
+                                         HexColor("#D3CCE3"),
+                                        HexColor("#E9E4F0"),
+//                                        HexColor("#F0C27B"),
+//                                        HexColor("#4B1248")
+//
                                       ]
                                   )
                               ),
@@ -161,7 +163,8 @@ class SingleProduct extends StatelessWidget {
                             InkWell(
                               onTap: () =>
                               {
-                                Navigator.of(context).push(MaterialPageRoute(
+                                Navigator.push(context,MaterialPageRoute(
+
                                     builder: (context) =>
                                         ProductDetails(
                                           product_detail_name: pictures[0].name,

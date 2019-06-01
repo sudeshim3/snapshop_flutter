@@ -84,36 +84,39 @@ class _ProductDetailsState extends State<ProductDetails> {
                       bottomRight: Radius.circular(newCurveRadius)),
                   color: Colors.white),
               child: Padding(
-                padding: const EdgeInsets.all(32.0),
+                padding: const EdgeInsets.only(top:32.0, bottom: 32.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     /*SizedBox(
                       height: 32.0,
                     ),*/
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          flex: 6,
-                          child: Text(
-                            "Black Blazer",
-                            style: TextStyle(
-                                fontSize: 35.0, fontWeight: FontWeight.bold),
+                    Padding(
+                      padding: const EdgeInsets.only(left:32.0,right: 32.0),
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            flex: 6,
+                            child: Text(
+                              "Black Blazer",
+                              style: TextStyle(
+                                  fontSize: 35.0, fontWeight: FontWeight.bold),
+                            ),
                           ),
-                        ),
-                        Expanded(
-                            flex: 1,
-                            child: Padding(
-                                padding: const EdgeInsets.only(bottom: 3.0),
-                                child: HighLightedIcon(Icons.favorite_border,
-                                    size: 34, color: Colors.red)
-                                /*IconButton(icon: Icon(fav ? Icons.favorite : Icons.favorite_border, color: Colors.red,size: 35,),onPressed: () {
-                          setState(() {
-                              fav = !fav;
-                          });
-                        },),*/
-                                )),
-                      ],
+                          Expanded(
+                              flex: 1,
+                              child: Padding(
+                                  padding: const EdgeInsets.only(bottom: 3.0),
+                                  child: HighLightedIcon(Icons.favorite_border,
+                                      size: 34, color: Colors.red)
+                                  /*IconButton(icon: Icon(fav ? Icons.favorite : Icons.favorite_border, color: Colors.red,size: 35,),onPressed: () {
+                            setState(() {
+                                fav = !fav;
+                            });
+                          },),*/
+                                  )),
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 32.0,
@@ -124,38 +127,41 @@ class _ProductDetailsState extends State<ProductDetails> {
                           landingImage: widget.carousalImage, fitType:BoxFit.contain, previewType: true, height: MediaQuery.of(context).size.height * 0.6),
                     ),
                     SizedBox(height: 20.0,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              "\$${widget.product_detail_new_price.toInt().toString()}",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 40,
-                                  color: Colors.green),
-                            ),
-                            SizedBox(
-                              height: 5.0,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Text(
-                                "\$${widget.product_detail_old_price.toInt().toString()}",
+                    Padding(
+                      padding: const EdgeInsets.only(left:32.0,right: 32.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                "\$${widget.product_detail_new_price.toInt().toString()}",
                                 style: TextStyle(
-                                    fontSize: 20,
                                     fontWeight: FontWeight.bold,
-                                    decoration: TextDecoration.lineThrough),
+                                    fontSize: 40,
+                                    color: Colors.green),
                               ),
-                            )
-                          ],
-                        ),
-                        FloatingActionButton(
-                          child: Icon(Icons.shopping_cart),
-                        )
-                      ],
+                              SizedBox(
+                                height: 5.0,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Text(
+                                  "\$${widget.product_detail_old_price.toInt().toString()}",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      decoration: TextDecoration.lineThrough),
+                                ),
+                              )
+                            ],
+                          ),
+                          FloatingActionButton(
+                            child: Icon(Icons.shopping_cart),
+                          )
+                        ],
+                      ),
                     ),
                   ],
                 ),
